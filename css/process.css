@@ -1,0 +1,122 @@
+/* ====== Process Steps (4 in one line) ====== */
+
+.grid11 {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* 4 per row on desktop */
+    gap: 1.75rem;
+    margin-block: 3rem;
+}
+
+/* Connecting line behind the numbered circles */
+.grid11::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    /* aligns with .num center */
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, #e5e7eb, #2563eb, #e5e7eb);
+    z-index: 0;
+}
+
+/* Each step card */
+.step {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "badge title"
+        ".     content";
+    column-gap: 0.75rem;
+    row-gap: 0.75rem;
+    padding: 1.4rem 1.4rem 1.6rem;
+    border-radius: 1.1rem;
+    border: 3px solid rgba(15, 23, 42, 0.08);
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    transition:
+        transform 160ms ease-out,
+        box-shadow 160ms ease-out,
+        border-color 160ms ease-out;
+    z-index: 1;
+    /* sits above the horizontal line */
+}
+
+/* Hover interaction */
+.step:hover,
+.step:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+    border-color: rgba(37, 99, 235, 0.35);
+}
+
+/* Number circle */
+.step .num {
+    grid-area: badge;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #E02454, #DBCACD);
+    color: #ffffff;
+    box-shadow: 0 6px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* Step title */
+.step strong.h4 {
+    grid-area: title;
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Step description list */
+.step ul.clean {
+    grid-area: content;
+    margin: 0.15rem 0 0;
+}
+
+/* If you used the global ul.clean styles from earlier,
+   they will automatically apply here too (checkmarks, spacing, etc.).
+   No extra changes needed. */
+
+/* ====== Responsive behavior ====== */
+
+/* Tablet: 2 × 2 layout, hide the long connecting line */
+@media (max-width: 992px) {
+    .grid11 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid11::before {
+        display: none;
+    }
+}
+
+/* Mobile: 1 per row */
+@media (max-width: 576px) {
+    .grid11 {
+        grid-template-columns: 1fr;
+    }
+
+    .step {
+        padding: 1.25rem 1.1rem 1.4rem;
+        border-radius: 0.95rem;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .step {
+        transition: none;
+    }
+}

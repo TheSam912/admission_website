@@ -1,0 +1,140 @@
+/* ====== Grid: 3 + 3 layout ====== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* 3 items per row on desktop */
+    gap: 1.75rem;
+    margin-block: 2.5rem;
+}
+
+/* 2 per row on medium screens */
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* 1 per row on small screens */
+@media (max-width: 576px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====== Card styling (neutral, no pink) ====== */
+
+.card {
+    position: relative;
+    padding: 1.6rem 1.6rem 1.8rem;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 55%),
+        #ffffff;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+    transition:
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out,
+        border-color 180ms ease-out,
+        background 180ms ease-out;
+    overflow: hidden;
+}
+
+/* Hover / focus interaction */
+.card:hover,
+.card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    border-color: rgba(37, 99, 235, 0.35);
+    background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 60%),
+        #ffffff;
+}
+
+/* Remove any special pink look from the last two cards */
+.grid>.card:nth-of-type(5),
+.grid>.card:nth-of-type(6) {
+    background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 55%),
+        #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* Top highlight bar */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #06b6d4);
+    opacity: 0.8;
+}
+
+/* Headings */
+.card .h5 {
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    color: #0f172a;
+    padding-top: 0.35rem;
+}
+
+.card p.mb-0 {
+    margin-bottom: 0;
+}
+
+/* List styling */
+ul.clean {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding-left: 0;
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+ul.clean li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.45rem;
+}
+
+ul.clean li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    font-size: 0.8rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(37, 99, 235, 0.25);
+    background: rgba(37, 99, 235, 0.06);
+    color: #2563eb;
+}
+
+/* Prices (em) a bit stronger but same text */
+ul.clean li em {
+    font-style: normal;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Mobile tweaks */
+@media (max-width: 575.98px) {
+    .card {
+        padding: 1.3rem 1.25rem 1.5rem;
+        border-radius: 0.9rem;
+    }
+
+    ul.clean li {
+        margin-bottom: 0.3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+}
